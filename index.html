@@ -2,72 +2,239 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workify | Connect Locally, Grow Globally</title>
+    <style>
+        /* --- CSS: THE LOOK --- */
+        :root {
+            --workify-green: #2ecc71;
+            --dark-blue: #2c3e50;
+            --light-gray: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--light-gray);
+            color: var(--dark-blue);
+        }
+
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--workify-green);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero & Filters */
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .filter-buttons {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-main { background: var(--workify-green); color: white; }
+        .btn-outline { background: transparent; border: 2px solid var(--workify-green); color: var(--workify-green); }
+        button:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        /* Job Cards */
+        #job-feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .job-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--workify-green);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background: #e1f5fe;
+            color: #0288d1;
+            text-transform: uppercase;
+        }
+
+        /* Profile Builder */
+        #profile-builder {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .profile-form { flex: 1; min-width: 300px; }
+        .profile-form input, .profile-form textarea, .profile-form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .worker-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px dashed #ccc;
+        }
+
+        /* Safety Section */
+        #safety {
+            background: #fff8e1;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <nav>
-      <div class="logo">Workify</div>
-      <ul>
-        <li><a href="#">Find Work</a></li>
-        <li><a href="#">Post a Job</a></li>
-        <li><a href="#">Messages</a></li>
-        <li><button class="login-btn">Login / Sign Up</button></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">Workify.</div>
+        <nav>
+            <button class="btn-outline">Find Work</button>
+            <button class="btn-main">Post a Job</button>
+        </nav>
+    </header>
 
-  <main>
-    <section id="hero">
-      <h1>The Bridge Between Local Talent and Global Needs</h1>
-      <p>Whether you're a plumber in Mombasa or a developer for a New York firm, Workify connects you.</p>
-      
-      <div class="search-container">
-        <input type="text" id="job-search" placeholder="What skill do you have?">
-        <input type="text" id="location-search" placeholder="City or Country">
-        <button id="search-btn">Search Jobs</button>
-      </div>
-    </section>
+    <div class="container">
+        <section class="hero">
+            <h1>Find Your Next Opportunity</h1>
+            <p>Bridging the gap between Kenyan talent and Global markets.</p>
+            <div class="filter-buttons">
+                <button onclick="displayJobs('all')">All Jobs</button>
+                <button onclick="displayJobs('local')"> Kenya Local</button>
+                <button onclick="displayJobs('international')"> International</button>
+            </div>
+            <div id="job-feed">
+                </div>
+        </section>
 
-    <section id="categories">
-      <h3>Popular Categories</h3>
-      <div class="tag-container">
-        <span class="tag">🇰🇪 Local Manual Labor</span>
-        <span class="tag">🌍 International Tech</span>
-        <span class="tag">🎨 Creative Arts</span>
-      </div>
-    </section>
+        <hr>
 
-    <section id="feed-container">
-      <aside id="filters">
-        <h4>Filter By:</h4>
-        <label><input type="checkbox"> Remote Only</label>
-        <label><input type="checkbox"> On-site Only</label>
-        <label>Price Range: <input type="range"></label>
-      </aside>
+        <section id="profile-builder">
+            <div class="profile-form">
+                <h2>Create Your Profile</h2>
+                <input type="text" id="in-name" placeholder="Full Name" oninput="updatePreview()">
+                <input type="text" id="in-skill" placeholder="Your Main Skill (e.g. Tiler, Coder)" oninput="updatePreview()">
+                <select id="in-loc" onchange="updatePreview()">
+                    <option value="Nairobi, Kenya">Nairobi</option>
+                    <option value="Mombasa, Kenya">Mombasa</option>
+                    <option value="Remote (International)">Remote (Global)</option>
+                </select>
+                <textarea id="in-bio" placeholder="Briefly describe your experience..." oninput="updatePreview()"></textarea>
+                <button class="btn-main" onclick="alert('Profile Saved to Workify Database!')">Publish Profile</button>
+            </div>
 
-      <div id="job-feed">
-        <article class="job-card">
-          <span class="badge">New</span>
-          <h2>UI/UX Designer Needed</h2>
-          <p class="company">TechGenics - Remote (International)</p>
-          <p class="description">Looking for a Kenyan-based designer to assist with a mobile app project...</p>
-          <div class="card-footer">
-            <span class="salary">$25/hr</span>
-            <button class="apply-btn">Apply Now</button>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
+            <div class="worker-card">
+                <div style="font-size: 50px;">👤</div>
+                <h3 id="pre-name">Your Name</h3>
+                <p id="pre-skill" style="color: var(--workify-green); font-weight: bold;">Professional Skill</p>
+                <p id="pre-loc"> Location</p>
+                <p id="pre-bio" style="font-style: italic; color: #666;">Your bio will appear here...</p>
+            </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2026 Workify Kenya. All rights reserved.</p>
-    <div>
-      <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        <section id="safety">
+            <h3> Workify Safety Tip</h3>
+            <p><strong>Never</strong> pay for "registration fees" to a client. Genuine employers on Workify will never ask you for money to give you a job.</p>
+        </section>
     </div>
-  </footer>
 
+    <footer>
+        <p>&copy; 2026 Workify Inc. Connecting Kenya to the World.</p>
+    </footer>
+
+    <script>
+        // 1. Job Data
+        const jobs = [
+            { title: "Residential Electrician", loc: "Nairobi, KE", type: "local", pay: "Ksh 3,500/day" },
+            { title: "React Developer", loc: "Remote (USA)", type: "international", pay: "$30/hr" },
+            { title: "Delivery Rider", loc: "Nakuru, KE", type: "local", pay: "Ksh 1,500/day" },
+            { title: "Virtual Assistant", loc: "Remote (UK)", type: "international", pay: "£12/hr" }
+        ];
+
+        // 2. Logic to Show Jobs
+        function displayJobs(filter) {
+            const container = document.getElementById('job-feed');
+            container.innerHTML = ''; // Clear current jobs
+
+            const filtered = jobs.filter(j => filter === 'all' || j.type === filter);
+
+            filtered.forEach(job => {
+                container.innerHTML += `
+                    <div class="job-card">
+                        <span class="badge">${job.type}</span>
+                        <h3>${job.title}</h3>
+                        <p><strong>Location:</strong> ${job.loc}</p>
+                        <p><strong>Pay:</strong> ${job.pay}</p>
+                        <button class="btn-outline" style="width:100%">View Details</button>
+                    </div>
+                `;
+            });
+        }
+
+        // 3. Logic for Profile Preview
+        function updatePreview() {
+            document.getElementById('pre-name').innerText = document.getElementById('in-name').value || "Your Name";
+            document.getElementById('pre-skill').innerText = document.getElementById('in-skill').value || "Professional Skill";
+            document.getElementById('pre-loc').innerText = " " + document.getElementById('in-loc').value;
+            document.getElementById('pre-bio').innerText = document.getElementById('in-bio').value || "Your bio will appear here...";
+        }
+
+        // Load all jobs when the page opens
+        window.onload = () => displayJobs('all');
+    </script>
 </body>
 </html>
