@@ -176,6 +176,10 @@
                 <textarea id="in-bio" placeholder="Briefly describe your experience..." oninput="updatePreview()"></textarea>
                 <button class="btn-main" onclick="alert('Profile Saved to Workify Database!')">Publish Profile</button>
             </div>
+             <section id="safety">
+            <h3> Workify Safety Tip</h3>
+            <p><strong>Never</strong> pay for "registration fees" to a client. Genuine employers on Workify will never ask you for money to give you a job.</p>
+        </section>
 
             <div class="worker-card">
                 <div style="font-size: 50px;">👤</div>
@@ -187,10 +191,11 @@
         </section>
 
         <section id="safety">
-            <h3> Workify Safety Tip</h3>
+            <h4> Workify Safety Tip</h4>
             <p><strong>Never</strong> pay for "registration fees" to a client. Genuine employers on Workify will never ask you for money to give you a job.</p>
         </section>
     </div>
+    
 
     <footer>
         <p>&copy; 2026 Workify Inc. Connecting Kenya to the World.</p>
@@ -205,7 +210,34 @@
             { title: "Virtual Assistant", loc: "Remote (UK)", type: "international", pay: "£12/hr" }
         ];
 
-        // 2. Logic to Show Jobs
+        //2. Logic to Show Jobs
+        // Function to add a new job to the list
+function addNewJob() {
+    // 1. Get the values from the form
+    const title = document.getElementById('newJobTitle').value;
+    const loc = document.getElementById('newJobLoc').value;
+    const type = document.getElementById('newJobType').value;
+    const pay = document.getElementById('newJobPay').value;
+
+    // 2. Basic check: Don't add if fields are empty
+    if (!title || !loc || !pay) {
+        alert("Please fill in all fields to post a job!");
+        return;
+    }
+
+    // 3. Add the new job to our "database" array
+    jobList.push({ title: title, place: loc, type: type, pay: pay });
+
+    // 4. Refresh the job feed so the new one appears immediately
+    showJobs('all');
+
+    // 5. Clear the form for the next entry
+    document.getElementById('newJobTitle').value = '';
+    document.getElementById('newJobLoc').value = '';
+    document.getElementById('newJobPay').value = '';
+    
+    alert("Job Posted Successfully!");
+}
         function displayJobs(filter) {
             const container = document.getElementById('job-feed');
             container.innerHTML = ''; // Clear current jobs
