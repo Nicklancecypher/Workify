@@ -137,71 +137,8 @@
             color: #777;
         }
     </style>
-  
-      
-    
-</head>
-<body>
- <header>
 
-        
-        <div class="logo">Workify.</div>
-        <nav>
-            <button class="btn-outline">Find Work</button>
-            <button class="btn-main">Post a Job</button>
-        </nav>
-    </header>
-
-    <div class="container">
-        <section class="hero">
-            <h1>Find Your Next Opportunity</h1>
-            <p>Bridging the gap between Kenyan talent and Global markets.</p>
-            <div class="filter-buttons">
-                <button onclick="displayJobs('all')">All Jobs</button>
-                <button onclick="displayJobs('local')"> Kenya Local</button>
-                <button onclick="displayJobs('international')"> International</button>
-            </div>
-            <div id="job-feed">
-                </div>
-        </section>
-        
-        <hr>
-
-        <section id="profile-builder">
-            <div class="profile-form">
-                <h2>Create Your Profile</h2>
-                <input type="text" id="in-name" placeholder="Full Name" oninput="updatePreview()">
-                <input type="text" id="in-skill" placeholder="Your Main Skill (e.g. Tiler, Coder)" oninput="updatePreview()">
-                <select id="in-loc" onchange="updatePreview()">
-                    <option value="Nairobi, Kenya">Nairobi</option>
-                    <option value="Mombasa, Kenya">Mombasa</option>
-                    <option value="Remote (International)">Remote (Global)</option>
-                </select>
-                <textarea id="in-bio" placeholder="Briefly describe your experience..." oninput="updatePreview()"></textarea>
-                <button class="btn-main" onclick="alert('Profile Saved to Workify Database!')">Publish Profile</button>
-            </div>
-
-            <div class="worker-card">
-                <div style="font-size: 50px;">👤</div>
-                <h3 id="pre-name">Your Name</h3>
-                <p id="pre-skill" style="color: var(--workify-green); font-weight: bold;">Professional Skill</p>
-                <p id="pre-loc"> Location</p>
-                <p id="pre-bio" style="font-style: italic; color: #666;">Your bio will appear here...</p>
-            </div>
-        </section>
-
-        <section id="safety">
-            <h3> Workify Safety Tip</h3>
-            <p><strong>Never</strong> pay for "registration fees" to a client. Genuine employers on Workify will never ask you for money to give you a job.</p>
-        </section>
-    </div>
-    
-
-    <footer>
-        <p>&copy; 2026 Workify Inc. Connecting Kenya to the World.</p>
-    </footer>
-    
-<script>
+    <script>
         // 1. Job Data
         const jobs = [
             { title: "Residential Electrician", loc: "Nairobi, KE", type: "local", pay: "Ksh 3,500/day" },
@@ -268,6 +205,71 @@ function addNewJob() {
         // Load all jobs when the page opens
         window.onload = () => displayJobs('all');
     </script>
+  
+      
+    
+</head>
+<body>
+ <header>
+
+        
+        <div class="logo">Workify.</div>
+        <nav>
+            <button class="btn-outline">Find Work</button>
+            <button class="btn-main">Post a Job</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Find Your Next Opportunity</h1>
+            <p>Bridging the gap between Kenyan talent and Global markets.</p>
+            <div class="filter-buttons">
+                <button onclick="displayJobs('all')">All Jobs</button>
+                <button onclick="displayJobs('local')"> Kenya Local</button>
+                <button onclick="displayJobs('international')"> International</button>
+            </div>
+            <div id="job-feed">
+                </div>
+        </section>
+        
+        <hr>
+
+        <section id="profile-builder">
+            <div class="profile-form">
+                <h2>Create Your Profile</h2>
+                <input type="text" id="in-name" placeholder="Full Name" oninput="updatePreview()">
+                <input type="text" id="in-skill" placeholder="Your Main Skill (e.g. Tiler, Coder)" oninput="updatePreview()">
+                <select id="in-loc" onchange="updatePreview()">
+                    <option value="Nairobi, Kenya">Nairobi</option>
+                    <option value="Mombasa, Kenya">Mombasa</option>
+                    <option value="Remote (International)">Remote (Global)</option>
+                </select>
+                <textarea id="in-bio" placeholder="Briefly describe your experience..." oninput="updatePreview()"></textarea>
+                <button class="btn-main" onclick="alert('Profile Saved to Workify Database!')">Publish Profile</button>
+            </div>
+
+            <div class="worker-card">
+                <div style="font-size: 50px;">👤</div>
+                <h3 id="pre-name">Your Name</h3>
+                <p id="pre-skill" style="color: var(--workify-green); font-weight: bold;">Professional Skill</p>
+                <p id="pre-loc"> Location</p>
+                <p id="pre-bio" style="font-style: italic; color: #666;">Your bio will appear here...</p>
+            </div>
+        </section>
+
+        <section id="safety">
+            <h3> Workify Safety Tip</h3>
+            <p><strong>Never</strong> pay for "registration fees" to a client. Genuine employers on Workify will never ask you for money to give you a job.</p>
+        </section>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2026 Workify Inc. Connecting Kenya to the World.</p>
+    </footer>
+    
+
 
    
 </body>
